@@ -12,6 +12,7 @@ load_dotenv()
 DISCORD_BOT_TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 
+
 # Discordボットトークンが設定されているか確認
 if not DISCORD_BOT_TOKEN:
   print("エラー: DISCORD_BOT_TOKENが設定されていません。")
@@ -47,9 +48,14 @@ def home():
   return "Bot is running!"
 
 
+# # Flaskサーバーを別スレッドで実行する関数
+# def run_flask_server():
+#   app.run(host='0.0.0.0', port=8080)
+
 # Flaskサーバーを別スレッドで実行する関数
 def run_flask_server():
-  app.run(host='0.0.0.0', port=8080)
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host='0.0.0.0', port=port)
 
 
 # ボットが起動したときに実行されるイベント
